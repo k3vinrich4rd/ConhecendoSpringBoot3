@@ -2,6 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.validation.Valid;
 import med.voll.api.medico.Medico;
+import med.voll.api.medico.dto.request.AtualizarDadosCadastroMedicoRequestDto;
 import med.voll.api.medico.dto.request.DadosCadastroMedicoRequestDto;
 import med.voll.api.medico.dto.response.DadosCadastroMedicoResponseDto;
 import med.voll.api.repository.MedicoRepository;
@@ -19,8 +20,8 @@ public class MedicoController {
     @Autowired
     private MedicoRepository medicoRepository;
 
-    @Transactional
     @PostMapping
+    @Transactional
     public void cadastrarMedico(@RequestBody @Valid DadosCadastroMedicoRequestDto dadosCadastroMedicoRequestDto) {
         medicoRepository.save(new Medico(dadosCadastroMedicoRequestDto));
 
@@ -31,5 +32,12 @@ public class MedicoController {
     public Page<DadosCadastroMedicoResponseDto> buscarMedicos(@PageableDefault(size = 10, sort = {"nome"}, page = 0) Pageable paginacao) {
         return medicoRepository.findAll(paginacao)
                 .map(DadosCadastroMedicoResponseDto::new);
+    }
+
+    @PutMapping()
+    @Transactional
+    public void atualizarCadastroDeMedico(@RequestBody @Valid AtualizarDadosCadastroMedicoRequestDto atualizarDadosCadastroMedicoRequestDto) {
+      var medico = medicoRepository.getReferenceById(atualizarDadosCadastroMedicoRequestDto.id());
+      medico.atualizarInformacoes(atualizarDadosCadastroMedicoRequestDto);
     }
 }

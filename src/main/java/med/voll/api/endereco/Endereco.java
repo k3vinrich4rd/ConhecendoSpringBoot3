@@ -1,7 +1,5 @@
 package med.voll.api.endereco;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Embeddable;
 import lombok.*;
 import med.voll.api.endereco.dto.request.DadosEnderecoRequestDto;
 
@@ -9,29 +7,21 @@ import med.voll.api.endereco.dto.request.DadosEnderecoRequestDto;
 @NoArgsConstructor
 @Getter
 @Setter
-@Embeddable
 public class Endereco {
 
-    @Column(length = 70, nullable = false)
-    String logradouro;
+    private String logradouro;
 
-    @Column(length = 70, nullable = false)
-    String bairro;
+    private String bairro;
 
-    @Column(length = 70, nullable = false)
-    String cep;
+    private String cep;
 
-    @Column(length = 70, nullable = false)
-    String cidade;
+    private String cidade;
 
-    @Column(length = 70, nullable = false)
-    String uf;
+    private String uf;
 
-    @Column(length = 70, nullable = false)
-    String complemento;
+    private String complemento;
 
-    @Column(length = 70, nullable = false)
-    String numero;
+    private String numero;
 
     public Endereco(DadosEnderecoRequestDto enderecoRequestDto) {
         this.logradouro = enderecoRequestDto.logradouro();

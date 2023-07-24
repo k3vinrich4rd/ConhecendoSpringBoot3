@@ -19,13 +19,10 @@ public class Medico {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     Long id;
 
-    @Column(length = 100, nullable = false)
     String nome;
 
-    @Column(length = 70, nullable = false)
     String email;
 
-    @Column(length = 25, nullable = false)
     String crm;
 
     @Enumerated(EnumType.STRING)

@@ -31,6 +31,8 @@ public class Medico {
 
     String telefone;
 
+    Boolean ativo;
+
     @Embedded
     @Column(length = 70, nullable = false)
     Endereco endereco;
@@ -42,6 +44,7 @@ public class Medico {
         this.crm = dadosCadastroMedicoRequestDto.crm();
         this.especialidade = dadosCadastroMedicoRequestDto.especialidade();
         this.telefone = dadosCadastroMedicoRequestDto.telefone();
+        this.ativo = true;
         this.endereco = new Endereco(dadosCadastroMedicoRequestDto.endereco());
     }
 
@@ -56,5 +59,9 @@ public class Medico {
         if (atualizarDadosCadastroMedicoRequestDto.endereco() != null) {
             this.endereco.atualizarInformacoesEndereco(atualizarDadosCadastroMedicoRequestDto.endereco());
         }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

@@ -12,6 +12,6 @@ public record DadosCadastroMedicoResponseDto(
         EspecialidadeEnum especialidade
 ) {
     public DadosCadastroMedicoResponseDto(Medico medico) {
-        this(medico.getId(),medico.getNome(), medico.getEmail(), medico.getCrm(), medico.getEspecialidade());
+        this(medico.getId(), medico.getNome(), medico.getEmail(), medico.getCrm(), medico.getEspecialidade());
     }
 }

@@ -34,6 +34,13 @@ public class MedicoController {
                 .map(DadosCadastroMedicoResponseDto::new);
     }
 
+    @GetMapping(path = "/active")
+    //Pageable padrão, mas é possível sobrescrever fazendo a busca
+    public Page<DadosCadastroMedicoResponseDto> buscarMedicosAtivo(@PageableDefault(size = 10, sort = {"nome"}, page = 0) Pageable paginacao) {
+        return medicoRepository.findAllByAtivoTrue(paginacao)
+                .map(DadosCadastroMedicoResponseDto::new);
+    }
+
     @PutMapping()
     @Transactional
     public void atualizarCadastroDeMedico(@RequestBody @Valid AtualizarDadosCadastroMedicoRequestDto atualizarDadosCadastroMedicoRequestDto) {
@@ -45,5 +52,12 @@ public class MedicoController {
     @Transactional
     public void excluirMedico(@PathVariable Long id) {
         medicoRepository.deleteById(id);
+    }
+
+    @DeleteMapping(path = "exclusao-logica/{id}")
+    @Transactional
+    public void exclusaoLogica(@PathVariable Long id) {
+        var medico = medicoRepository.getReferenceById(id);
+        medico.excluir();
     }
 }

@@ -28,6 +28,8 @@ public class Medico {
     @Enumerated(EnumType.STRING)
     EspecialidadeEnum especialidade;
 
+    String telefone;
+
     @Embedded
     @Column(length = 70, nullable = false)
     Endereco endereco;
@@ -38,6 +40,7 @@ public class Medico {
         this.email = dadosCadastroMedicoRequestDto.email();
         this.crm = dadosCadastroMedicoRequestDto.crm();
         this.especialidade = dadosCadastroMedicoRequestDto.especialidade();
+        this.telefone = dadosCadastroMedicoRequestDto.telefone();
         this.endereco = new Endereco(dadosCadastroMedicoRequestDto.endereco());
     }
 }

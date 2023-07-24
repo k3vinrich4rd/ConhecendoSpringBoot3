@@ -17,8 +17,12 @@ public record DadosCadastroMedicoRequestDto(
         @NotBlank
         @Pattern(regexp = "\\d{4,6}")
         String crm,
+
         @NotNull
         EspecialidadeEnum especialidade,
+
+        @NotBlank
+        String telefone,
 
         @NotNull
         @Valid

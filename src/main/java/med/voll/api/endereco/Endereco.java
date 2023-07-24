@@ -1,5 +1,7 @@
 package med.voll.api.endereco;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 import lombok.*;
 import med.voll.api.endereco.dto.request.DadosEnderecoRequestDto;
 
@@ -9,18 +11,25 @@ import med.voll.api.endereco.dto.request.DadosEnderecoRequestDto;
 @Setter
 public class Endereco {
 
+    @NotBlank
     private String logradouro;
 
+    @NotBlank
     private String bairro;
 
+    @NotBlank
+    @Pattern(regexp = "\\d{8}")
     private String cep;
 
+    @NotBlank
     private String cidade;
 
+    @NotBlank
     private String uf;
 
+    //opcional
     private String complemento;
-
+    //opcional
     private String numero;
 
     public Endereco(DadosEnderecoRequestDto enderecoRequestDto) {

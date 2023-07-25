@@ -45,7 +45,7 @@ public class MedicoController {
     @Transactional
     public void atualizarCadastroDeMedico(@RequestBody @Valid AtualizarDadosCadastroMedicoRequestDto atualizarDadosCadastroMedicoRequestDto) {
         var medico = medicoRepository.getReferenceById(atualizarDadosCadastroMedicoRequestDto.id());
-        medico.atualizarInformacoes(atualizarDadosCadastroMedicoRequestDto);
+        medico.atualizarInformacoesDoMedico(atualizarDadosCadastroMedicoRequestDto);
     }
 
     @DeleteMapping(path = "/{id}")

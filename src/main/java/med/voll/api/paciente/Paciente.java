@@ -27,6 +27,8 @@ public class Paciente {
 
     String cpf;
 
+    Boolean ativo;
+
     @Embedded
     Endereco endereco;
 
@@ -35,6 +37,7 @@ public class Paciente {
         this.email = dto.email();
         this.telefone = dto.telefone();
         this.cpf = dto.cpf();
+        this.ativo = true;
         this.endereco = new Endereco(dto.endereco());
     }
 
@@ -51,5 +54,9 @@ public class Paciente {
         if (atualizarDadosPacienteRequestDto.endereco() != null) {
             this.endereco.atualizarInformacoesEndereco(atualizarDadosPacienteRequestDto.endereco());
         }
+    }
+
+    public void excluir() {
+        this.ativo = false;
     }
 }

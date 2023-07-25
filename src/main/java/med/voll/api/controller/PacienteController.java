@@ -32,6 +32,12 @@ public class PacienteController {
                 .map(DadosPacienteResponseDto::new);
     }
 
+    @GetMapping(path = "/active")
+    public Page<DadosPacienteResponseDto> buscarPacientesAtivo(@PageableDefault(size = 10, sort = {"nome"}, page = 0) Pageable pageable) {
+        return pacienteRepository.findAllByAtivoTrue(pageable)
+                .map(DadosPacienteResponseDto::new);
+    }
+
     @PutMapping
     @Transactional
     public void atualizarPaciente(@RequestBody @Valid AtualizarDadosPacienteRequestDto atualizarDadosPacienteRequestDto) {
@@ -43,5 +49,12 @@ public class PacienteController {
     @Transactional
     public void deletarPaciente(@PathVariable Long id) {
         pacienteRepository.deleteById(id);
+    }
+
+    @DeleteMapping(path = "/exclusao-logica/{id}")
+    @Transactional
+    public void exclusaoLogica(@PathVariable Long id) {
+        var paciente = pacienteRepository.getReferenceById(id);
+        paciente.excluir();
     }
 }

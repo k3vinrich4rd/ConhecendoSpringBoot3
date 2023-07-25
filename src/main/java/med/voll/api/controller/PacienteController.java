@@ -2,6 +2,7 @@ package med.voll.api.controller;
 
 import jakarta.validation.Valid;
 import med.voll.api.paciente.Paciente;
+import med.voll.api.paciente.dto.request.AtualizarDadosPacienteRequestDto;
 import med.voll.api.paciente.dto.request.DadosPacientesRequestDto;
 import med.voll.api.paciente.dto.response.DadosPacienteResponseDto;
 import med.voll.api.repository.PacienteRepository;
@@ -29,6 +30,13 @@ public class PacienteController {
     public Page<DadosPacienteResponseDto> buscarPaciente(@PageableDefault(sort = {"nome"}, size = 9, page = 0) Pageable paginacao) {
         return pacienteRepository.findAll(paginacao)
                 .map(DadosPacienteResponseDto::new);
+    }
+
+    @PutMapping
+    @Transactional
+    public void atualizarPaciente(@RequestBody @Valid AtualizarDadosPacienteRequestDto atualizarDadosPacienteRequestDto) {
+        var paciente = pacienteRepository.getReferenceById(atualizarDadosPacienteRequestDto.id());
+        paciente.atualizarInformacoesDoPaciente(atualizarDadosPacienteRequestDto);
     }
 
 }

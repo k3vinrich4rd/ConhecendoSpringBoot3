@@ -3,6 +3,7 @@ package med.voll.api.paciente;
 import jakarta.persistence.*;
 import lombok.*;
 import med.voll.api.endereco.Endereco;
+import med.voll.api.paciente.dto.request.AtualizarDadosPacienteRequestDto;
 import med.voll.api.paciente.dto.request.DadosPacientesRequestDto;
 
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
@@ -37,4 +38,18 @@ public class Paciente {
         this.endereco = new Endereco(dto.endereco());
     }
 
+    public void atualizarInformacoesDoPaciente(AtualizarDadosPacienteRequestDto atualizarDadosPacienteRequestDto) {
+
+        if (atualizarDadosPacienteRequestDto.nome() != null) {
+            this.nome = atualizarDadosPacienteRequestDto.nome();
+        }
+
+        if (atualizarDadosPacienteRequestDto.telefone() != null) {
+            this.telefone = atualizarDadosPacienteRequestDto.telefone();
+        }
+
+        if (atualizarDadosPacienteRequestDto.endereco() != null) {
+            this.endereco.atualizarInformacoesEndereco(atualizarDadosPacienteRequestDto.endereco());
+        }
+    }
 }

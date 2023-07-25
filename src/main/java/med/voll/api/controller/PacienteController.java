@@ -39,4 +39,9 @@ public class PacienteController {
         paciente.atualizarInformacoesDoPaciente(atualizarDadosPacienteRequestDto);
     }
 
+    @DeleteMapping(path = "/{id}")
+    @Transactional
+    public void deletarPaciente(@PathVariable Long id) {
+        pacienteRepository.deleteById(id);
+    }
 }
